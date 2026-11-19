@@ -239,6 +239,40 @@ final class DocumentToolsCellTests: XCTestCase {
         try await received.verify(expectedSigner: owner)
         XCTAssertEqual(received.payload.owner.group, "Digipomps")
     }
+
+    // MARK: - test.cell.ops-flow-admin og test.cell.ops-flow-auth-negative (F2)
+
+    func testVerifiedAdminObserverReadsTheFlowButCannotWrite() async throws {
+        let (cell, _, outsider) = try await makeCell()
+        let observerIdentity = await CellBase.defaultIdentityVault?.identity(for: "documenttools-admin-observer", makeNewIfNotFound: true)
+        let observer = try XCTUnwrap(observerIdentity)
+        let observerUUID = observer.uuid
+        cell.adminObserver = DocumentToolAdminObserver { $0.uuid == observerUUID }
+
+        _ = try await cell.flow(requester: observer)
+        let purposes = try JSONValueBridge.decode([DocumentToolPurposes.Purpose].self,
+                                                  from: try await cell.get(keypath: "documenttools.purposes", requester: observer))
+        XCTAssertEqual(purposes.count, DocumentToolPurposes.all.count)
+        await assertDenied({ try await self.readMarkdown(cell, observer) }, "en observatør skal ikke få skrive")
+
+        do {
+            _ = try await cell.flow(requester: outsider)
+            XCTFail("uten verifisert admin.observer-bevis skal abonnementet avvises")
+        } catch {}
+    }
+
+    func testAdminObserverCheckIsStrict() {
+        XCTAssertEqual(DocumentToolAdminObserver.roleEndpoint(environment: [:]), nil)
+        XCTAssertEqual(DocumentToolAdminObserver.roleEndpoint(environment: [DocumentToolAdminEntry.environmentKey: "cell://admin.example/AdminScaffoldServices"]),
+                       "cell://admin.example/AdminRoleEnrollment")
+        XCTAssertEqual(DocumentToolAdminObserver.roleEndpoint(environment: [DocumentToolAdminEntry.environmentKey: "cell://admin.example/AdminScaffoldServices",
+                                                                            DocumentToolAdminObserver.roleEndpointEnvironmentKey: "cell://roles.example/AdminRoleEnrollment"]),
+                       "cell://roles.example/AdminRoleEnrollment")
+        XCTAssertTrue(DocumentToolAdminObserver.granted(.object(["granted": .bool(true), "role": .string("admin.observer")])))
+        for refused: ValueType? in [nil, .null, .string("denied"), .bool(true), .object(["granted": .bool(false)]), .object(["granted": .string("true")])] {
+            XCTAssertFalse(DocumentToolAdminObserver.granted(refused), "\(String(describing: refused))")
+        }
+    }
 }
 
 /// Stands in for AdminScaffold's `scaffoldServices.register` until WP16 builds the real one in CellScaffold.

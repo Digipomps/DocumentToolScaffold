@@ -14,7 +14,8 @@ import Foundation
 /// `purposes`, `ownership` and `state` are get operations. Errors come back as `{ "error": { "code", "message" } }`.
 ///
 /// Operational events (`DocumentToolOpsEvent`) go out on the cell's flow with the topic `documenttools.ops.v1`.
-/// They never carry document text, file names or hashes. Reading the flow needs `r---` on `feed`.
+/// They never carry document text, file names or hashes. Reading the flow needs `r---` on `feed`: the owner has it,
+/// and so does an `admin.observer` that AdminScaffold verifies (`DocumentToolAdminObserver`).
 public final class DocumentToolsCell: GeneralCell, EntityAtlasDescribing {
     public static let keyPrefix = "documenttools"
     public static let publicOperationKeys = [
@@ -28,6 +29,8 @@ public final class DocumentToolsCell: GeneralCell, EntityAtlasDescribing {
     /// The scaffold identity that owns the cell and signs the service description. Not persisted; the cell is ephemeral.
     private var signer: Identity?
     private var startedAt = Date()
+    /// Who besides the owner may read the flow and the get keys (F2). Set from the environment at start.
+    var adminObserver: DocumentToolAdminObserver = .fromEnvironment()
 
     public required init(owner: Identity) async {
         await super.init(owner: owner)
@@ -50,6 +53,15 @@ public final class DocumentToolsCell: GeneralCell, EntityAtlasDescribing {
             capabilityHints: Self.publicOperationKeys,
             knowledgeRoles: []
         )
+    }
+
+    // MARK: - Access (F2)
+
+    /// An `admin.observer` that AdminScaffold verifies may read the flow and the get keys. Nobody else gets in this way,
+    /// and nobody ever gets write access this way.
+    public override func validateCellSpecificAccess(_ requestedAccess: String, at keypath: String, for identity: Identity) async -> Bool {
+        guard requestedAccess == "r---", DocumentToolAdminObserver.readableKeypaths.contains(keypath) else { return false }
+        return await adminObserver.verify(identity)
     }
 
     // MARK: - Bindings

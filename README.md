@@ -50,7 +50,17 @@ same purposes.
 AdminScaffold (in CellScaffold) is DocumentToolScaffold's way into the rest of HAVEN (purpose D5). The scaffold is
 configured with the AdminScaffold endpoint, registers there with owner, purposes and instance identity, and finds other
 scaffolds and purposes through it. AdminScaffold subscribes to the scaffold's flow of operational events (purpose F).
-The events carry format, size, duration and error codes, never document content. The events are emitted by the cell today; registering with AdminScaffold and its subscription are planned.
+The events carry format, size, duration and error codes, never document content. The events are emitted by the cell today.
+
+| Setting | What it does |
+|---|---|
+| `DOCUMENTTOOLS_ADMIN_ENDPOINT` | AdminScaffold's services cell. The scaffold sends its signed service description there (`scaffoldServices.register`). Without it, health says `admin-endpoint-missing`. |
+| `DOCUMENTTOOLS_ADMIN_ROLE_ENDPOINT` | Where an `admin.observer` credential is checked. Defaults to `AdminRoleEnrollment` next to the admin endpoint. |
+| `DOCUMENTTOOLS_INSTANCE_ID` | The instance name in the service description. Defaults to a new UUID per start. |
+
+Besides the owner, only an identity whose `admin.observer` credential AdminScaffold verifies may read the flow and the
+`documenttools.*` get keys. It is asked on every request, so a revoked credential stops working at once, and this never
+gives write access. The receiving side in AdminScaffold is not built yet.
 
 ## Using the library
 
