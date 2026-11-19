@@ -1,0 +1,413 @@
+{
+ "schema": "argumentkart_native_fixture_expect_v1",
+ "note": "Fasit for de syntetiske fixturene, laget av tools/native.py v2 og kontrollert for hånd 2026-11-18. Ingen artikkeltekst.",
+ "v1": {
+  "paragraphs": [
+   {
+    "ref": "A1",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A2",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": [
+     "Havneplan for Nordvik 2024–2030"
+    ]
+   },
+   {
+    "ref": "A3",
+    "style": "Heading 1",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A4",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A5",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A6",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A7",
+    "style": "Heading 1",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A8",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A9",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A10",
+    "style": "List Paragraph",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A11",
+    "style": "Heading 1",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A12",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   },
+   {
+    "ref": "A13",
+    "style": "Normal",
+    "change": "første",
+    "footnotes": []
+   }
+  ],
+  "hits": {
+   "M1": [],
+   "M2": [
+    "A13"
+   ],
+   "M3": [],
+   "M4": [],
+   "M5": [],
+   "M6": []
+  }
+ },
+ "v2_against_v1": {
+  "paragraphs": [
+   {
+    "ref": "A1",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A2",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": [
+     "Havneplan for Nordvik 2024–2030"
+    ]
+   },
+   {
+    "ref": "A3",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A5",
+    "style": "Normal",
+    "change": "endret",
+    "footnotes": []
+   },
+   {
+    "ref": "A4",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A4a",
+    "style": "Normal",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A4b",
+    "style": "Quote",
+    "change": "ny",
+    "footnotes": [
+     "Intervju med fiktiv havnesjef, Nordvik, 2025"
+    ]
+   },
+   {
+    "ref": "A7",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A7a",
+    "style": "Heading 2",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A7b",
+    "style": "Heading 2",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A8",
+    "style": "Normal",
+    "change": "endret",
+    "footnotes": []
+   },
+   {
+    "ref": "A9",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": [
+     "fi_an_7.pdf",
+     "NOU 2031: 4 - example.org",
+     "Mangler i listen: Ukjent kilde om tidevann"
+    ]
+   },
+   {
+    "ref": "A9a",
+    "style": "List Paragraph",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A11",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A12",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13a",
+    "style": "Normal",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A13b",
+    "style": "Normal",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A13c",
+    "style": "Normal",
+    "change": "ny",
+    "footnotes": []
+   }
+  ],
+  "removed": [
+   "A6",
+   "A10"
+  ],
+  "merged": {
+   "A6": "A5"
+  },
+  "hits": {
+   "M1": [
+    "A4b",
+    "A9"
+   ],
+   "M2": [
+    "A13b",
+    "A13c"
+   ],
+   "M3": [
+    "A4a"
+   ],
+   "M4": [
+    "A7a"
+   ],
+   "M5": [
+    "A9a"
+   ],
+   "M6": [
+    "A5",
+    "A4a",
+    "A4b",
+    "A8",
+    "A9a"
+   ]
+  },
+  "M7_count": 2
+ },
+ "v3_against_v2": {
+  "paragraphs": [
+   {
+    "ref": "A1",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A2",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": [
+     "Havneplan for Nordvik 2024–2030"
+    ]
+   },
+   {
+    "ref": "A3",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A5",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A4",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A4c",
+    "style": "Normal",
+    "change": "ny",
+    "footnotes": []
+   },
+   {
+    "ref": "A4b",
+    "style": "Quote",
+    "change": "uendret",
+    "footnotes": [
+     "Intervju med fiktiv havnesjef, Nordvik, 2025"
+    ]
+   },
+   {
+    "ref": "A7",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A7a",
+    "style": "Heading 2",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A7b",
+    "style": "Heading 2",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A8",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A9",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": [
+     "fi_an_7.pdf",
+     "NOU 2031: 4 - example.org",
+     "Mangler i listen: Ukjent kilde om tidevann"
+    ]
+   },
+   {
+    "ref": "A9a",
+    "style": "List Paragraph",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A11",
+    "style": "Heading 1",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A12",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13a",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13b",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   },
+   {
+    "ref": "A13c",
+    "style": "Normal",
+    "change": "uendret",
+    "footnotes": []
+   }
+  ],
+  "removed": [
+   "A4a"
+  ],
+  "merged": {},
+  "hits": {
+   "M1": [
+    "A4b",
+    "A9"
+   ],
+   "M2": [
+    "A13b",
+    "A13c"
+   ],
+   "M3": [],
+   "M4": [
+    "A7a"
+   ],
+   "M5": [
+    "A9a"
+   ],
+   "M6": [
+    "A4c"
+   ]
+  },
+  "M7_count": 1
+ },
+ "invalid_inputs": {
+  "ikke_zip.docx": "not-a-docx",
+  "mangler_document.docx": "missing-document-xml"
+ }
+}

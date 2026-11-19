@@ -1,0 +1,106 @@
+{
+ "schema": "argumentkart_source_v1",
+ "title": "Syntetisk havnerapport",
+ "display": {
+  "eyebrow": "NATIVE ANALYSE · UTEN MODELL",
+  "title": "Syntetisk havnerapport",
+  "lede": "Avsnittene er nummerert, og overskriftene er gjort om til kapitler. Funnene er mekaniske: de teller og sammenligner, de vurderer ikke argumentet."
+ },
+ "paragraphs": [
+  {
+   "ref": "A1",
+   "style": "Normal",
+   "text": "Fiktiv rapport om havnedrift"
+  },
+  {
+   "ref": "A2",
+   "style": "Normal",
+   "text": "Byen Nordvik har en liten havn som brukes av fiskebåter og en ferje."
+  },
+  {
+   "ref": "A3",
+   "style": "Heading 1",
+   "text": "Bakgrunn"
+  },
+  {
+   "ref": "A5",
+   "style": "Normal",
+   "text": "Kommunen har vurdert flere løsninger uten å bestemme seg. Ferja går tre ganger om dagen hele året."
+  },
+  {
+   "ref": "A4",
+   "style": "Normal",
+   "text": "Havna ble bygd for lenge siden og trenger nye kaier."
+  },
+  {
+   "ref": "A4a",
+   "style": "Normal",
+   "text": "Havna tar imot 42 prosent flere anløp enn i 2019, og køen ved ferjeleiet er 300 meter lang i rushtiden."
+  },
+  {
+   "ref": "A4b",
+   "style": "Quote",
+   "text": "«Vi må gjøre noe nå», sa en fiktiv havnesjef i testen."
+  },
+  {
+   "ref": "A7",
+   "style": "Heading 1",
+   "text": "Forslag"
+  },
+  {
+   "ref": "A7a",
+   "style": "Heading 2",
+   "text": "Kaier"
+  },
+  {
+   "ref": "A7b",
+   "style": "Heading 2",
+   "text": "Ferjeleie"
+  },
+  {
+   "ref": "A8",
+   "style": "Normal",
+   "text": "Det første forslaget er å forlenge den nordre kaia med tretti meter og bygge et nytt lager."
+  },
+  {
+   "ref": "A9",
+   "style": "Normal",
+   "text": "Det andre forslaget er å flytte ferjeleiet til sørsiden."
+  },
+  {
+   "ref": "A9a",
+   "style": "List Paragraph",
+   "text": "Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen. Dette avsnittet er bevisst langt for å prøve grensen for svært lange avsnitt i testen."
+  },
+  {
+   "ref": "A11",
+   "style": "Heading 1",
+   "text": "Referanser"
+  },
+  {
+   "ref": "A12",
+   "style": "Normal",
+   "text": "[1] Nordvik kommune (2024). Havneplan for Nordvik 2024–2030. https://example.org/havneplan.pdf"
+  },
+  {
+   "ref": "A13",
+   "style": "Normal",
+   "text": "[2] Fiktivt institutt (2023). Rapport om små havner. Arbeidsnotat 2023/7. https://example.org/files/fi_an_7.pdf"
+  },
+  {
+   "ref": "A13a",
+   "style": "Normal",
+   "text": "[3] NOU 2031: 4 (2031). Fiktiv utredning om ferjer. https://example.org/nou-2031-4/"
+  },
+  {
+   "ref": "A13b",
+   "style": "Normal",
+   "text": "[4] NOU 2031: 5 (2031). Fiktiv utredning om havner. https://example.org/nou-2031-5/"
+  },
+  {
+   "ref": "A13c",
+   "style": "Normal",
+   "text": "[5] Testforfatter, A. (2020). En oppføring ingen viser til."
+  }
+ ]
+}
