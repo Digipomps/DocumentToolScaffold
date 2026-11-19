@@ -1,0 +1,255 @@
+{
+  "contract": "documenttools_cell_contract_v1",
+  "status": "iterasjon 3 (G2 godkjent 2026-11-19 15:05), samsvarer med DocumentToolsCell",
+  "cell": "cell:///DocumentTools",
+  "purposeRefs": "Hele listen hentes fra nøkkelstien documenttools.purposes og ExploreManifest.intent.purposeRefs; kilden er DocumentToolPurposes.swift.",
+  "rules": [
+    "Cellen lagrer ingenting. Forrige versjon for nummerering sendes inn av den som kaller.",
+    "Cellen kaller aldri en modell og skriver aldri ny tekst inn i dokumentet.",
+    "Formålsmatch gir ingen tilgang; tilgang følger cellens autorisasjon per requester og nøkkelsti.",
+    "Ingen nettverk. PDF bruker poppler som egen prosess med tidsfrist.",
+    "Alle feil har code og norsk message.",
+    "Feil i set gir {error:{code,message}}; invalid-payload for ugyldig input, internal for uventet feil."
+  ],
+  "limits": {
+    "maxInputBytes": 20971520,
+    "pdfTimeoutSeconds": 30
+  },
+  "keypaths": {
+    "documenttools.read": {
+      "input": {
+        "name": "string?",
+        "dataBase64": "string"
+      },
+      "output": {
+        "format": "docx|pdf|markdown|rtf|plaintext",
+        "sourceSHA256": "string",
+        "paragraphs": [
+          {
+            "style": "string",
+            "text": "string",
+            "footnotes": [
+              "string"
+            ]
+          }
+        ],
+        "warnings": [
+          "string"
+        ]
+      },
+      "errors": [
+        "unknown-format",
+        "too-large",
+        "not-a-docx",
+        "missing-document-xml",
+        "unreadable-xml",
+        "unreadable-rtf",
+        "pdf-engine-missing",
+        "pdf-timeout",
+        "no-text-layer",
+        "empty-document",
+        "unsupported-encoding"
+      ],
+      "method": "set"
+    },
+    "documenttools.number": {
+      "input": {
+        "paragraphs": "Paragraph[]",
+        "previous": "Numbered[]?",
+        "prefix": "string? (standard A)"
+      },
+      "output": {
+        "paragraphs": [
+          {
+            "ref": "A12|A12a",
+            "style": "string",
+            "text": "string",
+            "footnotes": [
+              "string"
+            ],
+            "change": "første|uendret|endret|flyttet|ny",
+            "similarity": "number?"
+          }
+        ],
+        "removed": [
+          "string"
+        ],
+        "merged": {
+          "ref": "ref"
+        }
+      },
+      "method": "set"
+    },
+    "documenttools.diff": {
+      "input": {
+        "numbered": "Outcome (fra number)"
+      },
+      "output": {
+        "changed": [
+          "ref"
+        ],
+        "moved": [
+          "ref"
+        ],
+        "added": [
+          "ref"
+        ],
+        "removed": [
+          "ref"
+        ],
+        "merged": {
+          "ref": "ref"
+        }
+      },
+      "method": "set"
+    },
+    "documenttools.prepare": {
+      "input": {
+        "numbered": "Numbered[]",
+        "maxTokensPerChunk": "integer?"
+      },
+      "output": {
+        "text": "string",
+        "sha256": "string",
+        "tokenEstimate": {
+          "value": "integer",
+          "method": "string",
+          "isEstimate": true
+        },
+        "chunks": [
+          {
+            "index": "integer",
+            "refs": [
+              "ref"
+            ],
+            "text": "string",
+            "tokenEstimate": "integer"
+          }
+        ]
+      },
+      "method": "set"
+    },
+    "documenttools.verifyRefs": {
+      "input": {
+        "refs": [
+          "ref"
+        ],
+        "knownRefs": [
+          "ref"
+        ]
+      },
+      "output": {
+        "ok": "boolean",
+        "unknown": [
+          "ref"
+        ]
+      },
+      "method": "set"
+    },
+    "documenttools.purposes": {
+      "method": "get",
+      "output": [
+        {
+          "code": "string",
+          "ref": "purpose://…",
+          "title": "string",
+          "goal": "string",
+          "availability": "available|planned|parked"
+        }
+      ]
+    },
+    "documenttools.ownership": {
+      "method": "get",
+      "output": {
+        "ownerGroup": "Digipomps",
+        "ownerLegalEntity": "Stiftelsen Digipomps (org. no. 922 135 134)",
+        "groupOwnerMembers": [
+          "Kjetil",
+          "Vegar"
+        ],
+        "enforced": false
+      }
+    },
+    "documenttools.state": {
+      "method": "get",
+      "output": "siste health-hendelse (status, reasons: pdf-engine-missing, admin-endpoint-missing)"
+    },
+    "documenttools.serviceDescription": {
+      "method": "get",
+      "output": {
+        "payload": {
+          "schemaVersion": "haven.documenttools.service.v1",
+          "canonicalization": "json_sorted_keys_v1",
+          "serviceID": "documenttools",
+          "instanceID": "DOCUMENTTOOLS_INSTANCE_ID eller uuid",
+          "environment": "CELL_SCAFFOLD_ENVIRONMENT?",
+          "cellEndpoint": "cell:///DocumentTools",
+          "opsTopic": "documenttools.ops.v1",
+          "purposeRefs": [
+            "purpose://…"
+          ],
+          "owner": {
+            "group": "Digipomps",
+            "legalEntity": "Stiftelsen Digipomps",
+            "organizationNumber": "922135134",
+            "groupOwnerMembers": [
+              "Kjetil",
+              "Vegar"
+            ],
+            "ownerEnforced": false
+          },
+          "signerIdentityID": "string",
+          "signerSigningPublicKeyFingerprint": "string",
+          "issuedAt": "ISO 8601 UTC"
+        },
+        "signature": {
+          "algorithm": "Ed25519",
+          "signatureBase64URL": "string"
+        }
+      }
+    }
+  },
+  "access": {
+    "owner": "rw-- på documenttools.*, r--- på feed",
+    "others": "nektes: set gir \"denied\", get gir \"denied\", flow nektes uten r--- på feed"
+  },
+  "opsFlow": {
+    "topic": "documenttools.ops.v1",
+    "kinds": [
+      "started",
+      "stopped",
+      "read.completed",
+      "read.failed",
+      "pdf-engine-missing",
+      "timeout",
+      "health"
+    ],
+    "fields": [
+      "kind",
+      "at",
+      "format?",
+      "bytes?",
+      "paragraphs?",
+      "durationMs?",
+      "errorCode?",
+      "status?",
+      "reasons?"
+    ],
+    "never": [
+      "dokumenttekst",
+      "filnavn",
+      "kildehash"
+    ]
+  },
+  "adminEntry": {
+    "environment": "DOCUMENTTOOLS_ADMIN_ENDPOINT",
+    "registerKeypath": "scaffoldServices.register (set på AdminScaffold, verdi = serviceDescription)",
+    "outcomes": [
+      "notConfigured",
+      "registered",
+      "unreachable(kode)",
+      "rejected(kode)"
+    ],
+    "note": "Mottaket i AdminScaffold er WP16 og finnes ikke ennå."
+  }
+}

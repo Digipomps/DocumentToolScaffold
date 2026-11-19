@@ -43,6 +43,11 @@ public enum PDFReader {
         return paths
     }
 
+    /// Whether `pdftotext` was found. Without it, reading a PDF gives `pdf-engine-missing`.
+    public static var engineAvailable: Bool {
+        candidatePaths.contains { FileManager.default.isExecutableFile(atPath: $0) }
+    }
+
     public static var timeoutSeconds: TimeInterval = 30
 
     public static func read(data: Data) throws -> Result {

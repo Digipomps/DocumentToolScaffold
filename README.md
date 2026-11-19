@@ -11,7 +11,7 @@ to open issues and pull requests.
 ## Purposes
 
 What the scaffold is for, as purposes. The same list is in code (`DocumentToolPurposes`), and the cell
-`cell:///DocumentTools` will return it over CellProtocol (`ExploreManifest.intent.purposeRefs` and the `purposes` key
+`cell:///DocumentTools` returns it over CellProtocol (`ExploreManifest.intent.purposeRefs` and the `purposes` key
 path), so other scaffolds can ask what DocumentToolScaffold can do. A test checks that this README and the code list the
 same purposes.
 
@@ -35,13 +35,13 @@ same purposes.
 | C3 | `purpose://candidate.dokumentverktoy.model-ready.refs-check` | The model's A-numbers exist | Every A-number in a model answer must exist in the text the model was given. | available |
 | D | `purpose://candidate.dokumentverktoy.reach` | Other scaffolds can use it | A Swift library for use in the same process, and a cell for use over CellBridge. | available |
 | D1 | `purpose://candidate.dokumentverktoy.reach.library` | Library without cells | DocumentTools depends only on Foundation, FoundationXML and ZIPFoundation, and builds on macOS and Linux. | available |
-| D2 | `purpose://candidate.dokumentverktoy.reach.cell` | Cell with key paths | cell:///DocumentTools with read, number, prepare and diff; data in the payload, no file on disk. | planned |
-| D3 | `purpose://candidate.dokumentverktoy.reach.announced` | Purposes are readable and queryable | This list is in the README and in code, and the cell answers it over CellProtocol (ExploreManifest purposeRefs and the purposes key path). | planned |
+| D2 | `purpose://candidate.dokumentverktoy.reach.cell` | Cell with key paths | cell:///DocumentTools with read, number, prepare and diff; data in the payload, no file on disk. | available |
+| D3 | `purpose://candidate.dokumentverktoy.reach.announced` | Purposes are readable and queryable | This list is in the README and in code, and the cell answers it over CellProtocol (ExploreManifest purposeRefs and the purposes key path). | available |
 | D4 | `purpose://candidate.dokumentverktoy.reach.argumentmap-uses-it` | The argument map uses the tool | ArgumentMapCell imports DocumentTools with no changed behaviour. | planned |
 | D5 | `purpose://candidate.dokumentverktoy.reach.admin-entry` | AdminScaffold is the way into the rest of HAVEN | The scaffold is configured with the AdminScaffold endpoint, registers there with owner, purposes and instance identity, and finds other scaffolds and purposes through it. | planned |
 | E | `purpose://candidate.dokumentverktoy.paid` | Paid use with micropayments | Deferred to a separate PDD. | parked |
 | F | `purpose://candidate.dokumentverktoy.operations` | Operations are visible to AdminScaffold | The scaffold emits operational events as a Flow, and AdminScaffold subscribes to it. | planned |
-| F1 | `purpose://candidate.dokumentverktoy.operations.events` | Operational events without content | Start, stop, read completed, read failed (error code), pdf-engine-missing, timeout and health. Format, size, duration and error code only; never document text, file names or source hashes. | planned |
+| F1 | `purpose://candidate.dokumentverktoy.operations.events` | Operational events without content | Start, stop, read completed, read failed (error code), pdf-engine-missing, timeout and health. Format, size, duration and error code only; never document text, file names or source hashes. | available |
 | F2 | `purpose://candidate.dokumentverktoy.operations.admin-subscribes` | AdminScaffold subscribes | AdminScaffold attaches to the flow with an admin.observer proof; without a proof the subscription is refused. | planned |
 | G | `purpose://candidate.dokumentverktoy.ownership` | Digipomps owns the scaffold | The owner is the Digipomps group identity (Stiftelsen Digipomps, org. no. 922 135 134), with Kjetil and Vegar as group owner members, declared in a signed service description that AdminScaffold reads. | planned |
 
@@ -50,7 +50,7 @@ same purposes.
 AdminScaffold (in CellScaffold) is DocumentToolScaffold's way into the rest of HAVEN (purpose D5). The scaffold is
 configured with the AdminScaffold endpoint, registers there with owner, purposes and instance identity, and finds other
 scaffolds and purposes through it. AdminScaffold subscribes to the scaffold's flow of operational events (purpose F).
-The events carry format, size, duration and error codes, never document content. Both parts are planned.
+The events carry format, size, duration and error codes, never document content. The events are emitted by the cell today; registering with AdminScaffold and its subscription are planned.
 
 ## Using the library
 
@@ -72,6 +72,29 @@ let check = ModelReadyText.verifyRefs(["A12", "A999"], knownRefs: numbered.parag
 
 Errors are `DocumentToolsError` with a stable `code` (`too-large`, `unknown-format`, `empty-document`,
 `unreadable-rtf`, `pdf-engine-missing`, `pdf-timeout`, `unreadable-pdf`, `no-text-layer`, …).
+
+## Using the cell
+
+The product `DocumentToolCells` has `DocumentToolsCell`, a CellProtocol cell for use over CellBridge. It stores nothing;
+the caller keeps the previous version and sends it back for numbering.
+
+| Key path | Method | Input → output |
+|---|---|---|
+| `documenttools.read` | set | `{name, dataBase64}` → `DocumentText` |
+| `documenttools.number` | set | `{paragraphs, previous?, prefix?}` → numbering outcome |
+| `documenttools.diff` | set | `{numbered}` → version diff |
+| `documenttools.prepare` | set | `{numbered, maxTokensPerChunk?}` → model-ready text |
+| `documenttools.verifyRefs` | set | `{refs, knownRefs}` → `{ok, unknown}` |
+| `documenttools.purposes` | get | the purposes above |
+| `documenttools.ownership` | get | owner group and group owner members |
+| `documenttools.state` | get | health, for example whether the PDF engine is present |
+
+Errors come back as `{ "error": { "code", "message" } }`. `ExploreManifest.intent.purposeRefs` for the cell carries the
+purpose references, so a scaffold can find out what the cell is for without calling it. Operational events
+(`DocumentToolOpsEvent`) go out on the cell's flow with the topic `documenttools.ops.v1`.
+
+CellProtocol is pinned to the same revision as CellScaffold. CellProtocol depends on the private package
+`Digipomps/FileUtils-c`, so building `DocumentToolCells` needs access to it; the `DocumentTools` library does not.
 
 ## Dependencies
 
